@@ -1,0 +1,31 @@
+name: aquarium-ui.cssをビルド
+
+on:
+  push:
+    branches: [build]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm install postcss postcss-cli postcss-import
+
+      - run: npx postcss aquarium-ui/index.css -o aquarium-ui.css
+
+      - name: aquarium-ui.cssをmainブランチにプッシュ
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git checkout main
+          git checkout build -- aquarium-ui.css
+          git add aquarium-ui.css
+          git commit -m "build: update aquarium-ui.css"
+          git push origin main
