@@ -18,9 +18,8 @@ jobs:
         with:
           node-version: '24'
 
-      - run: npm install postcss postcss-cli postcss-import
-
-      - run: npx postcss aquarium-ui/index.css -o aquarium-ui.css
+      - run: npm install lightningcss-cli
+      - run: npx lightningcss --bundle aquarium-ui/index.css -o aquarium-ui.css
 
       - name: aquarium-ui.cssをmainブランチにプッシュ
         run: |
