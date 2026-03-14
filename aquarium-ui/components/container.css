@@ -1,0 +1,8 @@
+/* 全体コンテナ */
+
+.container {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  min-height: 100dvh;
+}
